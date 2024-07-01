@@ -1,4 +1,4 @@
 export default {
     '*.ts': () => 'bun run lint:staged',
-    '*.json': 'prettier --write'
+    '*.json': ['prettier --write', 'biome format --write ']
 };

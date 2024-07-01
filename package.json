@@ -1,12 +1,9 @@
 {
     "name": "a38",
     "version": "0.0.1",
-    "workspaces": [
-        "shared/*",
-        "pkg/*"
-    ],
+    "workspaces": ["shared/*", "pkg/*"],
     "scripts": {
-        "build": "turbo lint test clean build",
+        "build": "turbo build",
         "docs": "typedoc",
         "lint": "turbo run lint",
         "lint:changed": "turbo run lint:changed",
