@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "lib": ["ESNext"],
+        "module": "CommonJS",
+        "target": "esnext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "composite": true,
+        "downlevelIteration": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowJs": false,
+        "inlineSourceMap": true,
+        "declaration": true,
+        "noErrorTruncation": true
+    }
+}

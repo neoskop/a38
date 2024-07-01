@@ -1,0 +1,21 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports.biome": "explicit"
+    },
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
+    "[json]": {
+        // Biome cannot sort dependencies in package.json
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        // Biome cannot format YAML
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        // Biome cannot format HTML nor Angular Templates
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

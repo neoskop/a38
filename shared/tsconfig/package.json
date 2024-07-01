@@ -1,0 +1,12 @@
+{
+    "name": "@a38/tsconfig",
+    "version": "0.0.1",
+    "exports": {
+        ".": "./tsconfig.json"
+    },
+    "scripts": {
+        "lint": "biome check .",
+        "lint:changed": "biome check . --changed --no-errors-on-unmatched",
+        "lint:staged": "biome check . --staged --no-errors-on-unmatched --write"
+    }
+}

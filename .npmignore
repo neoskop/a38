@@ -1,0 +1,4 @@
+typedoc.json
+.turbo
+tsconfig.tsbuildinfo
+tsconfig.esm.tsbuildinfo

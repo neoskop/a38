@@ -1,0 +1,10 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "extends": ["@a38/typedoc"],
+    "entryPoints": ["pkg/*"],
+    "exclude": [],
+    "name": "A38",
+    "entryPointStrategy": "packages",
+    "includeVersion": false,
+    "out": "./docs"
+}

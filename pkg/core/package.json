@@ -1,0 +1,37 @@
+{
+    "name": "@a38/core",
+    "version": "0.0.1",
+    "exports": {
+        ".": {
+            "bun": "./src/index.ts",
+            "require": "./lib/cjs/index.js",
+            "import": "./lib/esm/index.js",
+            "types": "./src/index.ts"
+        },
+        "./awaitable": {
+            "bun": "./src/awaitable.ts",
+            "require": "./lib/cjs/awaitable.js",
+            "import": "./lib/esm/awaitable.js",
+            "types": "./src/awaitable.ts"
+        }
+    },
+    "main": "./lib/cjs/index.js",
+    "types": "./src/index.ts",
+    "scripts": {
+        "build": "tsc && tsc --project tsconfig.esm.json && echo '{ \"type\":\"module\" }' > lib/esm/package.json",
+        "clean": "rm -rf lib",
+        "lint": "biome lint .",
+        "lint:changed": "biome check . --changed --no-errors-on-unmatched",
+        "lint:staged": "biome check . --staged --no-errors-on-unmatched --write",
+        "test": "bun test",
+        "test:coverage": "bun test --coverage",
+        "test:watch": "bun test --watch"
+    },
+    "devDependencies": {
+        "@a38/tsconfig": "workspace:*",
+        "@a38/typedoc": "workspace:*",
+        "@types/node": "20.14.9",
+        "ts-node": "10.9.2",
+        "typescript": "5.5.2"
+    }
+}

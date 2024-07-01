@@ -1,0 +1,89 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true,
+        "defaultBranch": "develop"
+    },
+    "files": {
+        "ignore": [
+            "*.js",
+            "*.cjs",
+            "*.mjs",
+            "*.d.ts",
+            "internal-tools/poeditor/src/poeditor-api/**",
+            "modules/skynet/src/modules/poeditor/**",
+            "pkg/shared/hola-rest-api/src/**",
+            "pkg/shared/neo-rest-api/src/**",
+            "pkg/shared/pdf-service-rest-api/src/**"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 140,
+        "attributePosition": "auto"
+    },
+    "organizeImports": {
+        "enabled": true
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "suspicious": {
+                "noConsoleLog": "error",
+                "noDebugger": "error",
+                "noEmptyInterface": "off",
+                "noExplicitAny": "error",
+                "useAwait": "error",
+                "noEmptyBlockStatements": "off"
+            },
+            "nursery": {
+                "noUndeclaredDependencies": "off",
+                "useImportExtensions": "error"
+            },
+            "correctness": {
+                "noUnusedImports": "error",
+                "noUnusedVariables": "error"
+            },
+            "complexity": {
+                "noBannedTypes": "warn",
+                "noForEach": "warn"
+            },
+            "style": {
+                "noNonNullAssertion": "off",
+                "noNamespace": "off",
+                "noInferrableTypes": "warn"
+            }
+        }
+    },
+    "javascript": {
+        "parser": {
+            "unsafeParameterDecoratorsEnabled": true
+        },
+        "formatter": {
+            "jsxQuoteStyle": "double",
+            "quoteProperties": "asNeeded",
+            "trailingCommas": "none",
+            "semicolons": "always",
+            "arrowParentheses": "asNeeded",
+            "bracketSpacing": true,
+            "bracketSameLine": false,
+            "quoteStyle": "single",
+            "attributePosition": "auto"
+        }
+    },
+    "json": {
+        "parser": {
+            "allowComments": true
+        },
+        "formatter": {
+            "indentStyle": "space"
+        }
+    }
+}

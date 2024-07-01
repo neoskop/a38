@@ -1,0 +1,36 @@
+{
+    "name": "a38",
+    "version": "0.0.1",
+    "workspaces": [
+        "shared/*",
+        "pkg/*"
+    ],
+    "scripts": {
+        "build": "turbo lint test clean build",
+        "docs": "typedoc",
+        "lint": "turbo run lint",
+        "lint:changed": "turbo run lint:changed",
+        "lint:staged": "turbo run lint:staged",
+        "prepare": "husky",
+        "test": "turbo run test"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.8.3",
+        "@commitlint/cli": "19.3.0",
+        "@commitlint/config-conventional": "19.2.2",
+        "@commitlint/prompt-cli": "19.3.1",
+        "@commitlint/types": "19.0.3",
+        "@types/bun": "1.1.6",
+        "@types/node": "20.14.9",
+        "commitlint-config-monorepo": "2.0.2",
+        "glob": "10.4.2",
+        "husky": "9.0.11",
+        "lint-staged": "15.2.7",
+        "prettier": "3.3.2",
+        "prettier-plugin-packagejson": "2.5.0",
+        "turbo": "2.0.6",
+        "typedoc": "0.26.3",
+        "typescript": "5.5.2"
+    },
+    "packageManager": "bun@1.1.4"
+}
