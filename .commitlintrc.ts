@@ -8,6 +8,6 @@ module.exports = {
     extends: ['@commitlint/config-conventional', 'monorepo'],
     formatter: '@commitlint/format',
     rules: {
-        'scope-enum': [RuleConfigSeverity.Error, 'always', [...workspaces, 'repo']]
+        'scope-enum': [RuleConfigSeverity.Error, 'always', [...workspaces, 'repo', 'release', 'github']]
     }
 } satisfies UserConfig;
