@@ -1,4 +1,4 @@
 {
     "files": [],
-    "references": [{ "path": "./pkg/await" }, { "path": "./pkg/option" }, { "path": "./pkg/result" }, { "path": "./pkg/utils" }]
+    "references": [{ "path": "./pkg/core" }]
 }

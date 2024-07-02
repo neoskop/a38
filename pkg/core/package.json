@@ -1,25 +1,19 @@
 {
     "name": "@a38/core",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "exports": {
         ".": {
             "bun": "./src/index.ts",
-            "require": "./lib/cjs/index.js",
-            "import": "./lib/esm/index.js",
+            "require": "./libs/index.js",
+            "import": "./lib/index.mjs",
             "types": "./src/index.ts"
-        },
-        "./awaitable": {
-            "bun": "./src/awaitable.ts",
-            "require": "./lib/cjs/awaitable.js",
-            "import": "./lib/esm/awaitable.js",
-            "types": "./src/awaitable.ts"
         }
     },
-    "main": "./lib/cjs/index.js",
+    "main": "./lib/index.js",
+    "module": "./lib/index.mjs",
     "types": "./src/index.ts",
     "scripts": {
-        "build": "tsc && tsc --project tsconfig.esm.json && echo '{ \"type\":\"module\" }' > lib/esm/package.json",
-        "clean": "rm -rf lib",
+        "build": "tsup src/index.ts --format cjs,esm --out-dir lib",
         "lint": "biome lint .",
         "lint:changed": "biome check . --changed --no-errors-on-unmatched",
         "lint:staged": "biome check . --staged --no-errors-on-unmatched --write",
@@ -28,8 +22,9 @@
         "test:watch": "bun test --watch"
     },
     "devDependencies": {
-        "@a38/tsconfig": "workspace:*",
-        "@a38/typedoc": "workspace:*",
+        "@a38/biome-config": "0.0.1",
+        "@a38/tsconfig": "0.0.1",
+        "@a38/typedoc": "0.0.1",
         "@types/node": "20.14.9",
         "ts-node": "10.9.2",
         "typescript": "5.5.2"
