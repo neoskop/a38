@@ -35,5 +35,5 @@
         "typedoc": "0.26.3",
         "typescript": "5.5.2"
     },
-    "packageManager": "bun@1.1.4"
+    "packageManager": "bun@1.1.17"
 }
