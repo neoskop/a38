@@ -11,10 +11,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
-              uses: actions/checkout@v3
+              uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
 
             - name: Install Bun
-              uses: oven-sh/setup-bun@v1
+              uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7 # v1
               with:
                   bun-version: latest
 
@@ -24,6 +24,6 @@ jobs:
                   bun run docs
 
             - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@v4
+              uses: JamesIves/github-pages-deploy-action@5c6e9e9f3672ce8fd37b9856193d2a537941e66c # v4
               with:
                   folder: docs # The folder the action should deploy.
