@@ -5,12 +5,14 @@
     "scripts": {
         "build": "turbo build",
         "changeset": "changeset",
+        "do-release": "turbo run build && changeset publish",
         "docs": "typedoc",
         "lint": "turbo run lint",
         "lint:changed": "turbo run lint:changed",
         "lint:staged": "turbo run lint:staged",
         "prepare": "husky",
-        "test": "turbo run test"
+        "test": "turbo run test",
+        "version": "changeset version"
     },
     "devDependencies": {
         "@a38/biome-config": "0.0.1",
