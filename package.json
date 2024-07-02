@@ -17,7 +17,7 @@
     "devDependencies": {
         "@a38/biome-config": "0.0.1",
         "@biomejs/biome": "1.8.3",
-        "@changesets/cli": "^2.27.7",
+        "@changesets/cli": "2.27.7",
         "@commitlint/cli": "19.3.0",
         "@commitlint/config-conventional": "19.2.2",
         "@commitlint/prompt-cli": "19.3.1",
@@ -30,7 +30,7 @@
         "lint-staged": "15.2.7",
         "prettier": "3.3.2",
         "prettier-plugin-packagejson": "2.5.0",
-        "tsup": "^8.1.0",
+        "tsup": "8.1.0",
         "turbo": "2.0.6",
         "typedoc": "0.26.3",
         "typescript": "5.5.2"
