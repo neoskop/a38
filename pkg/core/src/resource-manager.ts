@@ -1,5 +1,6 @@
 import { ChildNode } from './child-node.js';
 
+export type SerializeResources = [resource: string, parents: string[]][];
 export class Resource {
     constructor(public readonly resourceId: string) {}
 }

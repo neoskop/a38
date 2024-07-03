@@ -46,7 +46,7 @@ describe('PermissionManager', () => {
 
         const json = manager.toJSON();
 
-        const otherManager = new PermissionManager().fromJSON(json);
+        const otherManager = new PermissionManager().importJSON(json);
 
         expect(otherManager).toEqual(manager);
     });

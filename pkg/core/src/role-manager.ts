@@ -1,5 +1,6 @@
 import { ChildNode } from './child-node.js';
 
+export type SerializeRoles = [role: string, parents: string[]][];
 export class Role {
     constructor(public readonly roleId: string) {}
 }

@@ -1,3 +1,5 @@
+export type SerializedChildNodes = [id: string, parents: string[]][];
+
 export abstract class ChildNode<T> {
     protected parents = new Map<string, string[]>();
 
@@ -42,5 +44,27 @@ export abstract class ChildNode<T> {
         }
 
         return result;
+    }
+
+    toJSON(): SerializedChildNodes {
+        return [...this.parents.entries()];
+    }
+
+    importJSON(json: SerializedChildNodes | unknown) {
+        if (!Array.isArray(json)) {
+            throw new Error(`Invalid serialize [${Object.getPrototypeOf(this).constructor.name}]: ${JSON.stringify(json)}`);
+        }
+        for (const entry of json) {
+            if (!Array.isArray(entry) || entry.length !== 2) {
+                throw new Error(`Invalid serialize [${Object.getPrototypeOf(this).constructor.name}] entry: ${JSON.stringify(entry)}`);
+            }
+
+            const [role, parents] = entry as [unknown, unknown];
+            if (typeof role !== 'string' || !Array.isArray(parents) || parents.some(p => typeof p !== 'string')) {
+                throw new Error(`Invalid serialize [${Object.getPrototypeOf(this).constructor.name}] entry: ${JSON.stringify(entry)}`);
+            }
+            this.setParents(role, parents);
+        }
+        return this;
     }
 }
