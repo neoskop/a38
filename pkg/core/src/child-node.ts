@@ -5,6 +5,12 @@ export abstract class ChildNode<T> {
 
     protected abstract assertEntryId(entryOrId: T | string): string;
 
+    has(entryOrId: T | string): boolean {
+        const id = this.assertEntryId(entryOrId);
+
+        return this.parents.has(id);
+    }
+
     getParents(entryOrId: T | string): string[] {
         const id = this.assertEntryId(entryOrId);
 
