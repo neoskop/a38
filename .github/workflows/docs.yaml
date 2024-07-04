@@ -1,10 +1,13 @@
-name: Build and Deploy
+name: Docs Build and Deploy
 on:
     push:
         branches:
             - develop
 permissions:
-    contents: write
+    contents: read
+    pages: write
+    id-token: write
+
 jobs:
     build-and-deploy:
         concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
@@ -22,8 +25,15 @@ jobs:
               run: |
                   bun install
                   bun run docs
-
-            - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@5c6e9e9f3672ce8fd37b9856193d2a537941e66c # v4
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
               with:
-                  folder: docs # The folder the action should deploy.
+                # Upload entire repository
+                path: 'docs'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
+            # - name: Deploy 🚀
+            #   uses: JamesIves/github-pages-deploy-action@5c6e9e9f3672ce8fd37b9856193d2a537941e66c # v4
+            #   with:
+            #       folder: docs # The folder the action should deploy.
