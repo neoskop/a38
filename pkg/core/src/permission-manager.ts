@@ -13,7 +13,7 @@ export type Assertion<ROLE extends Role = Role, RESOURCE extends Resource = Reso
 
 export interface SerializedRule {
     type: Type;
-    privileges: string[] | null;
+    privileges?: string[] | null;
 }
 
 export class Rule<ROLE extends Role = Role, RESOURCE extends Resource = Resource> {
@@ -23,12 +23,11 @@ export class Rule<ROLE extends Role = Role, RESOURCE extends Resource = Resource
             typeof json !== 'object' ||
             !('type' in json) ||
             (json.type !== 'allow' && json.type !== 'deny') ||
-            !('privileges' in json) ||
-            (!Array.isArray(json.privileges) && json.privileges !== null)
+            ('privileges' in json && !Array.isArray(json.privileges) && json.privileges !== null)
         ) {
             throw new Error(`Invalid serialize [Rule]: ${JSON.stringify(json)}`);
         }
-        return new Rule(json.type, json.privileges && new Set(json.privileges));
+        return new Rule(json.type, 'privileges' in json && json.privileges ? new Set(json.privileges as string[]) : null);
     }
 
     constructor(
@@ -103,7 +102,9 @@ export class ResourceRuleMap implements Iterable<[string | null, Rule[]]> {
     }
 }
 
-export type SerializedRoleResourceRuleMap = [roleId: string | null, rrmap: SerializedResourceRuleMap][];
+// export type SerializedRoleResourceRuleMap = [roleId: string | null, rrmap: SerializedResourceRuleMap][];
+
+export type SerializedPermissions = (readonly [roleId: string | null, resourceId: string | null, rule: SerializedRule])[];
 
 export class RoleResourceRuleMap implements Iterable<[string | null, ResourceRuleMap]> {
     private map = new Map<string | null, ResourceRuleMap>();
@@ -126,24 +127,28 @@ export class RoleResourceRuleMap implements Iterable<[string | null, ResourceRul
         return this.map.entries();
     }
 
-    toJSON(): SerializedRoleResourceRuleMap {
-        return [...this.map.entries()].map(([resource, rrMap]) => [resource, rrMap.toJSON()]);
+    toJSON(): SerializedPermissions {
+        return [...this.map.entries()].flatMap(([role, rrMap]) => {
+            return [...rrMap].flatMap(([resource, rules]) => {
+                return rules.map(rule => [role, resource, rule.toJSON()] as const);
+            });
+        });
     }
 
-    importJSON(json: SerializedRoleResourceRuleMap | unknown) {
+    importJSON(json: SerializedPermissions | unknown) {
         if (!Array.isArray(json)) {
             throw new Error(`Invalid serialize [RoleResourceRuleMap]: ${JSON.stringify(json)}`);
         }
         for (const entry of json) {
-            if (!Array.isArray(entry) || entry.length !== 2) {
+            if (!Array.isArray(entry) || entry.length !== 3) {
                 throw new Error(`Invalid serialize [RoleResourceRuleMap] entry: ${JSON.stringify(entry)}`);
             }
 
-            const [role, rrMap] = entry as [unknown, unknown];
-            if (role !== null && typeof role !== 'string') {
+            const [role, resource, rule] = entry as [unknown, unknown, unknown];
+            if ((role !== null && typeof role !== 'string') || (resource !== null && typeof resource !== 'string')) {
                 throw new Error(`Invalid serialize [RoleResourceRuleMap] entry: ${JSON.stringify(entry)}`);
             }
-            this.get(role).importJSON(rrMap);
+            this.get(role).add(resource, Rule.fromJSON(rule)); //importJSON(rrMap);
         }
         return this;
     }
@@ -195,11 +200,11 @@ export class PermissionManager {
         this.add<ROLE, RESOURCE>('deny', role, resource, privileges ?? null, assertion);
     }
 
-    toJSON(): SerializedRoleResourceRuleMap {
+    toJSON(): SerializedPermissions {
         return this.rrrm.toJSON();
     }
 
-    importJSON(json: SerializedRoleResourceRuleMap | unknown): this {
+    importJSON(json: SerializedPermissions | unknown): this {
         this.rrrm.importJSON(json);
         return this;
     }

@@ -31,10 +31,10 @@ describe('PermissionManager', () => {
         const json = manager.toJSON();
 
         expect(json).toEqual([
-            ['roleA', [['resource', [{ type: 'allow', privileges: ['privilegeA'] }]]]],
-            ['roleB', [['resource', [{ type: 'deny', privileges: ['privilegeB', 'privilegeC'] }]]]],
-            ['roleC', [['resource', [{ type: 'allow', privileges: null }]]]],
-            ['roleD', [[null, [{ type: 'allow', privileges: null }]]]]
+            ['roleA', 'resource', { type: 'allow', privileges: ['privilegeA'] }],
+            ['roleB', 'resource', { type: 'deny', privileges: ['privilegeB', 'privilegeC'] }],
+            ['roleC', 'resource', { type: 'allow', privileges: null }],
+            ['roleD', null, { type: 'allow', privileges: null }]
         ]);
     });
 

@@ -24,7 +24,7 @@ export interface A38ModuleOptions {
         | PartialExistingProvider<RoleResolver>;
     roles?: core.SerializedRoles;
     resources?: core.SerializedResources;
-    permissions?: core.SerializedRoleResourceRuleMap;
+    permissions?: core.SerializedPermissions;
 }
 
 export type PartialValueProvider<T> = Pick<ValueProvider<T>, 'useValue'>;

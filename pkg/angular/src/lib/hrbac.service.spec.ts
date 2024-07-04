@@ -64,9 +64,9 @@ describe('HrbacService', () => {
             .getHrbac()
             .getResourceManager()
             .importJSON([['resourceA', ['depA', 'depB']]]);
-        loader.loadPermissions.mockResolvedValueOnce([['roleA', [['resourceA', [{ type: 'allow', privileges: null }]]]]]);
+        loader.loadPermissions.mockResolvedValueOnce([['roleA', 'resourceA', { type: 'allow', privileges: null }]]);
         expect(await service.isAllowed('roleA', 'resourceA')).toBeTruthy();
         expect(loader.loadPermissions).toHaveBeenCalledWith(['roleA', 'depA', 'depB'], ['resourceA', 'depA', 'depB']);
-        expect(permissionManagerImportJSONMock).toHaveBeenCalledWith([['roleA', [['resourceA', [{ type: 'allow', privileges: null }]]]]]);
+        expect(permissionManagerImportJSONMock).toHaveBeenCalledWith([['roleA', 'resourceA', { type: 'allow', privileges: null }]]);
     });
 });

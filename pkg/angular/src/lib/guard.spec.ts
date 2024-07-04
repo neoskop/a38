@@ -63,22 +63,12 @@ describe('a38Allowed', () => {
                         return router.parseUrl('/error/403');
                     },
                     permissions: [
-                        [
-                            null,
-                            [
-                                ['dashboard', [{ type: 'allow', privileges: null }]],
-                                ['error', [{ type: 'allow', privileges: null }]],
-                                ['login', [{ type: 'allow', privileges: null }]]
-                            ]
-                        ],
-                        ['user', [['login', [{ type: 'deny', privileges: null }]]]],
-                        [
-                            'admin',
-                            [
-                                [null, [{ type: 'allow', privileges: null }]],
-                                ['login', [{ type: 'deny', privileges: null }]]
-                            ]
-                        ]
+                        [null, 'dashboard', { type: 'allow', privileges: null }],
+                        [null, 'error', { type: 'allow', privileges: null }],
+                        [null, 'login', { type: 'allow', privileges: null }],
+                        ['user', 'login', { type: 'deny', privileges: null }],
+                        ['admin', null, { type: 'allow', privileges: null }],
+                        ['admin', 'login', { type: 'deny', privileges: null }]
                     ]
                 }),
                 RouterModule.forRoot(

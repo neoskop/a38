@@ -13,7 +13,7 @@ export interface A38ModuleOptions {
     guardDenyHandler: InjectionToken<GuardDenyHandler> | GuardDenyHandler;
     roles?: Value<core.SerializedRoles>;
     resources?: Value<core.SerializedResources>;
-    permissions?: Value<core.SerializedRoleResourceRuleMap>;
+    permissions?: Value<core.SerializedPermissions>;
 }
 
 function resolveDependency<T>(value: Value<T>): T;
