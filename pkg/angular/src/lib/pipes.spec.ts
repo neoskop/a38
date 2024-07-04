@@ -3,7 +3,7 @@ import { Component, NgZone } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { A38Module } from './a38.module';
 import { A38AllowedPipe, A38DeniedPipe } from './pipes';
-import { DEFAULT_ROLE, RoleStore } from './role-store';
+import { RoleStore } from './role-store';
 
 @Component({
     standalone: true,

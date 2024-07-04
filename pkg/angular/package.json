@@ -3,6 +3,9 @@
     "version": "0.0.1",
     "scripts": {
         "build": "ng build",
+        "lint": "biome lint .",
+        "lint:changed": "biome check . --changed --no-errors-on-unmatched",
+        "lint:staged": "biome check . --staged --no-errors-on-unmatched --write",
         "ng": "ng",
         "start": "ng serve",
         "test": "rm -rf dist && NODE_OPTIONS='--no-deprecation --no-warnings' ng test",

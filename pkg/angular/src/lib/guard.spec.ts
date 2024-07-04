@@ -4,7 +4,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 
 import { A38Module } from './a38.module';
-import { a38Allowed, defineRouteResourceData } from './guard';
+import { a38Allowed } from './guard';
 import { RoleStore } from './role-store';
 
 @Component({
@@ -87,25 +87,21 @@ describe('a38Allowed', () => {
                             path: '',
                             pathMatch: 'full',
                             component: DashboardComponent,
-                            // data: { ...defineRouteResourceData('dashboard') },
                             canActivate: [a38Allowed('dashboard')]
                         },
                         {
                             path: 'login',
                             component: LoginComponent,
-                            // data: { ...defineRouteResourceData('login') },
                             canActivate: [a38Allowed('login')]
                         },
                         {
                             path: 'admin',
                             component: AdminComponent,
-                            // data: { ...defineRouteResourceData('admin') },
                             canActivate: [a38Allowed('admin')]
                         },
                         {
                             path: 'error/:code',
                             component: ErrorComponent,
-                            // data: { ...defineRouteResourceData('error') },
                             canActivate: [a38Allowed('error')]
                         },
                         {

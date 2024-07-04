@@ -1,9 +1,6 @@
 import { InjectionToken, computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
-const defaultRole = Symbol('defaultRole');
-const currentRole = Symbol('currentRole');
-
 export interface RoleStoreState {
     defaultRole: string;
     currentRole: string | undefined;
