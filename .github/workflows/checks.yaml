@@ -27,6 +27,11 @@ jobs:
             - name: Install Bun
               uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7 # v1
 
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.15.0
+
             - name: Install
               run: |
                   bun install
