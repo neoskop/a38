@@ -1,6 +1,7 @@
 {
     "name": "a38",
     "version": "0.0.1",
+    "private": true,
     "workspaces": ["shared/*", "pkg/*"],
     "scripts": {
         "build": "turbo build",
@@ -33,7 +34,7 @@
         "tsup": "8.1.0",
         "turbo": "2.0.6",
         "typedoc": "0.26.3",
-        "typescript": "5.5.2"
+        "typescript": "5.4.5"
     },
     "packageManager": "bun@1.1.17"
 }
