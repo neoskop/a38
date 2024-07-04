@@ -2,7 +2,7 @@ name: Docs Build and Deploy
 on:
     push:
         branches:
-            - develop
+            - master
 permissions:
     contents: read
     pages: write
