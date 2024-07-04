@@ -26,6 +26,6 @@
         "@a38/tsconfig": "0.0.1",
         "@a38/typedoc": "0.0.1",
         "@types/node": "20.14.9",
-        "typescript": "5.4.5"
+        "typescript": "5.5.3"
     }
 }
