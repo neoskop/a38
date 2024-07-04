@@ -34,5 +34,8 @@
         "@angular/common": "*",
         "@angular/core": "*",
         "@angular/router": "*"
+    },
+    "publishConfig": {
+        "directory": "./lib"
     }
 }
