@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "composite": true,
+        "declaration": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "inlineSourceMap": true,
         "lib": ["ESNext"],
         "module": "CommonJS",
-        "target": "esnext",
         "moduleResolution": "Node",
-        "strict": true,
-        "composite": true,
-        "downlevelIteration": true,
+        "noErrorTruncation": true,
         "skipLibCheck": true,
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "allowJs": false,
-        "inlineSourceMap": true,
-        "declaration": true,
-        "noErrorTruncation": true
+        "strict": true,
+        "target": "esnext"
     }
 }

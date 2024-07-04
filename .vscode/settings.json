@@ -4,8 +4,6 @@
     "editor.codeActionsOnSave": {
         "source.organizeImports.biome": "explicit"
     },
-    "javascript.preferences.importModuleSpecifierEnding": "js",
-    "typescript.preferences.importModuleSpecifierEnding": "js",
     "[json]": {
         // Biome cannot sort dependencies in package.json
         "editor.defaultFormatter": "esbenp.prettier-vscode"

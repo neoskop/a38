@@ -1,0 +1,4 @@
+{
+    "extends": ["@a38/typedoc"],
+    "entryPoints": ["src/index.ts"]
+}

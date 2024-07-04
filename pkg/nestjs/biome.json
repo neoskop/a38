@@ -1,0 +1,7 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
+    "extends": ["../../shared/biome-config/biome.json", "../../shared/biome-config/workspace.json"],
+    "files": {
+        "ignore": ["*.js", "*.cjs", "*.mjs"]
+    }
+}
