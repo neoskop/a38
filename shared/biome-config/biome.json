@@ -44,8 +44,7 @@
                 "noEmptyBlockStatements": "off"
             },
             "nursery": {
-                "noUndeclaredDependencies": "off",
-                "useImportExtensions": "error"
+                "noUndeclaredDependencies": "off"
             },
             "correctness": {
                 "noUnusedImports": "error",

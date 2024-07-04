@@ -1,6 +1,6 @@
 export type SerializedChildNodes = [id: string, parents: string[]][];
 
-export abstract class ChildNode<T> {
+export abstract class ChildNode<T, S extends SerializedChildNodes> {
     protected parents = new Map<string, string[]>();
 
     protected abstract assertEntryId(entryOrId: T | string): string;
@@ -52,11 +52,11 @@ export abstract class ChildNode<T> {
         return result;
     }
 
-    toJSON(): SerializedChildNodes {
-        return [...this.parents.entries()];
+    toJSON(): S {
+        return [...this.parents.entries()] as S;
     }
 
-    importJSON(json: SerializedChildNodes | unknown) {
+    importJSON(json: S | unknown) {
         if (!Array.isArray(json)) {
             throw new Error(`Invalid serialize [${Object.getPrototypeOf(this).constructor.name}]: ${JSON.stringify(json)}`);
         }

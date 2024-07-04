@@ -11,8 +11,8 @@ export type Value<T> = T | InjectionToken<T> | (() => T);
 export interface A38ModuleOptions {
     defaultRole: string;
     guardDenyHandler: InjectionToken<GuardDenyHandler> | GuardDenyHandler;
-    roles?: Value<core.SerializeRoles>;
-    resources?: Value<core.SerializeResources>;
+    roles?: Value<core.SerializedRoles>;
+    resources?: Value<core.SerializedResources>;
     permissions?: Value<core.SerializedRoleResourceRuleMap>;
 }
 
