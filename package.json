@@ -26,7 +26,7 @@
         "@types/bun": "1.1.6",
         "@types/node": "20.14.10",
         "commitlint-config-monorepo": "2.0.2",
-        "glob": "10.4.3",
+        "glob": "10.4.4",
         "husky": "9.0.11",
         "lint-staged": "15.2.7",
         "prettier": "3.3.2",
