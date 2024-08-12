@@ -21,7 +21,11 @@ export class HRBAC {
         return this.permissionManager;
     }
 
-    protected resolve(roleOrRoleId: Role | string, resourceOrResourceId: Resource | string, privilege: string | null): Type | null {
+    protected async resolve(
+        roleOrRoleId: Role | string,
+        resourceOrResourceId: Resource | string,
+        privilege: string | null
+    ): Promise<Type | null> {
         const role = typeof roleOrRoleId === 'string' ? new Role(roleOrRoleId) : roleOrRoleId;
         const resource = typeof resourceOrResourceId === 'string' ? new Resource(resourceOrResourceId) : resourceOrResourceId;
 
@@ -30,7 +34,7 @@ export class HRBAC {
         const rules = [...this.getPermissionManager().getRules(roles, resources)].toReversed();
 
         for (const rule of rules) {
-            if (rule.match(this, role, resource, privilege)) {
+            if (await rule.match(this, role, resource, privilege)) {
                 return rule.type;
             }
         }
@@ -38,11 +42,19 @@ export class HRBAC {
         return 'deny';
     }
 
-    isAllowed(roleOrRoleId: Role | string, resourceOrResourceId: Resource | string, privilege: string | null = null): boolean {
-        return this.resolve(roleOrRoleId, resourceOrResourceId, privilege) === 'allow';
+    async isAllowed(
+        roleOrRoleId: Role | string,
+        resourceOrResourceId: Resource | string,
+        privilege: string | null = null
+    ): Promise<boolean> {
+        return (await this.resolve(roleOrRoleId, resourceOrResourceId, privilege)) === 'allow';
     }
 
-    isDenied(roleOrRoleId: Role | string, resourceOrResourceId: Resource | string, privilege: string | null = null): boolean {
-        return this.resolve(roleOrRoleId, resourceOrResourceId, privilege) === 'deny';
+    async isDenied(
+        roleOrRoleId: Role | string,
+        resourceOrResourceId: Resource | string,
+        privilege: string | null = null
+    ): Promise<boolean> {
+        return (await this.resolve(roleOrRoleId, resourceOrResourceId, privilege)) === 'deny';
     }
 }
