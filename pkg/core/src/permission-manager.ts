@@ -9,7 +9,7 @@ export type Assertion<ROLE extends Role = Role, RESOURCE extends Resource = Reso
     role: ROLE | null,
     resource: RESOURCE | null,
     privilege: string | null
-) => boolean;
+) => boolean | Promise<boolean>;
 
 export interface SerializedRule {
     type: Type;
@@ -36,14 +36,14 @@ export class Rule<ROLE extends Role = Role, RESOURCE extends Resource = Resource
         public readonly assertion?: Assertion<ROLE, RESOURCE>
     ) {}
 
-    match(hrbac: HRBAC, role: ROLE, resource: RESOURCE, privilege: string | null): boolean {
+    async match(hrbac: HRBAC, role: ROLE, resource: RESOURCE, privilege: string | null): Promise<boolean> {
         if (null === privilege) {
             if (this.privileges) return false;
         }
 
         if (this.privileges && privilege && !this.privileges.has(privilege)) return false;
 
-        return !this.assertion || this.assertion(hrbac, role, resource, privilege);
+        return !this.assertion || (await this.assertion(hrbac, role, resource, privilege));
     }
 
     toJSON(): SerializedRule {
