@@ -1,27 +1,29 @@
-# Angular
+# @a38/angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+[Angular](https://angular.dev/) bindings for the [@a38/core](https://www.npmjs.com/package/@a38/core) hierarchical RBAC library.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm install @a38/angular    # for NPM
+yarn add @a38/angular       # for Yarn
+pnpm add @a38/angular       # for PNPM
+```
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```typescript
+// @TODO: write usage example
+```
 
-## Build
+## Docs
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+See the [documentation](https://neoskop.github.io/a38/modules/_a38_angular.html)
 
-## Running unit tests
+## License
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@a38/core is licensed under the MIT License, See the [LICENSE](../../LICENSE) file for more details
 
-## Running end-to-end tests
+## Sponsoring
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The project development and maintenance is sponsored by [Neoskop](https://neoskop.de).
