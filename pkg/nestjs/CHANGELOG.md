@@ -1,5 +1,13 @@
 # @a38/nestjs
 
+## 0.0.5
+
+### Patch Changes
+
+-   bb11da0: Fix exports
+-   Updated dependencies [afe9f55]
+    -   @a38/core@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes

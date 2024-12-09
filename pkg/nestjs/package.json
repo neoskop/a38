@@ -1,6 +1,6 @@
 {
     "name": "@a38/nestjs",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "exports": {
         ".": {
             "bun": "./src/index.ts",
@@ -23,7 +23,7 @@
     },
     "devDependencies": {
         "@a38/biome-config": "0.0.1",
-        "@a38/core": "0.0.4",
+        "@a38/core": "0.0.5",
         "@a38/tsconfig": "0.0.1",
         "@a38/typedoc": "0.0.1",
         "@nestjs/common": "10.4.1",

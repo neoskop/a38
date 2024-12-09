@@ -1,5 +1,11 @@
 # @a38/core
 
+## 0.0.5
+
+### Patch Changes
+
+-   afe9f55: Fix exports
+
 ## 0.0.3
 
 ### Patch Changes
