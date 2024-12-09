@@ -1,5 +1,11 @@
 # @a38/nestjs
 
+## 0.0.3
+
+### Patch Changes
+
+-   22fb1dc: Add missing exports
+
 ## 0.0.1
 
 ### Patch Changes
