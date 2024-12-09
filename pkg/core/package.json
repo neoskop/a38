@@ -4,7 +4,7 @@
     "exports": {
         ".": {
             "bun": "./src/index.ts",
-            "require": "./libs/index.js",
+            "require": "./lib/index.js",
             "import": "./lib/index.mjs",
             "types": "./src/index.ts"
         }
