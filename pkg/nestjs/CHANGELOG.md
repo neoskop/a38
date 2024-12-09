@@ -1,5 +1,11 @@
 # @a38/nestjs
 
+## 0.0.4
+
+### Patch Changes
+
+-   1b9abd8: Fix Version build
+
 ## 0.0.3
 
 ### Patch Changes
