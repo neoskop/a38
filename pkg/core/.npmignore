@@ -2,3 +2,4 @@ typedoc.json
 .turbo
 tsconfig.tsbuildinfo
 tsconfig.esm.tsbuildinfo
+biome.json
