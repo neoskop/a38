@@ -102,8 +102,6 @@ export class ResourceRuleMap implements Iterable<[string | null, Rule[]]> {
     }
 }
 
-// export type SerializedRoleResourceRuleMap = [roleId: string | null, rrmap: SerializedResourceRuleMap][];
-
 export type SerializedPermissions = (readonly [roleId: string | null, resourceId: string | null, rule: SerializedRule])[];
 
 export class RoleResourceRuleMap implements Iterable<[string | null, ResourceRuleMap]> {
@@ -148,21 +146,21 @@ export class RoleResourceRuleMap implements Iterable<[string | null, ResourceRul
             if ((role !== null && typeof role !== 'string') || (resource !== null && typeof resource !== 'string')) {
                 throw new Error(`Invalid serialize [RoleResourceRuleMap] entry: ${JSON.stringify(entry)}`);
             }
-            this.get(role).add(resource, Rule.fromJSON(rule)); //importJSON(rrMap);
+            this.get(role).add(resource, Rule.fromJSON(rule));
         }
         return this;
     }
 }
 
 export class PermissionManager {
-    private rrrm = new RoleResourceRuleMap();
+    private roleResourceRuleMap = new RoleResourceRuleMap();
 
     *getRules(roles: string[], resources: string[]): Generator<Rule, void, undefined> {
         const roleSet = new Set(roles);
         const resourceSet = new Set(resources);
-        for (const [role, rrMap] of this.rrrm) {
+        for (const [role, resourceRuleMap] of this.roleResourceRuleMap) {
             if (!(role === null || roleSet.has(role))) continue;
-            for (const [resource, rules] of rrMap) {
+            for (const [resource, rules] of resourceRuleMap) {
                 if (!(resource === null || resourceSet.has(resource))) continue;
                 yield* rules;
             }
@@ -179,7 +177,7 @@ export class PermissionManager {
         const roleId = null == role ? null : assertRoleId(role);
         const resourceId = null == resource ? null : assertResourceId(resource);
 
-        this.rrrm.get(roleId).add(resourceId, new Rule(type, privileges && new Set(privileges), assertion));
+        this.roleResourceRuleMap.get(roleId).add(resourceId, new Rule(type, privileges && new Set(privileges), assertion));
     }
 
     allow<ROLE extends Role = Role, RESOURCE extends Resource = Resource>(
@@ -201,11 +199,11 @@ export class PermissionManager {
     }
 
     toJSON(): SerializedPermissions {
-        return this.rrrm.toJSON();
+        return this.roleResourceRuleMap.toJSON();
     }
 
     importJSON(json: SerializedPermissions | unknown): this {
-        this.rrrm.importJSON(json);
+        this.roleResourceRuleMap.importJSON(json);
         return this;
     }
 }

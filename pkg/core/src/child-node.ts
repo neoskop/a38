@@ -1,6 +1,6 @@
 export type SerializedChildNodes = [id: string, parents: string[]][];
 
-export abstract class ChildNode<T, S extends SerializedChildNodes> {
+export abstract class ChildNode<T extends { parents?: T[] }, S extends SerializedChildNodes> {
     protected parents = new Map<string, string[]>();
 
     protected abstract assertEntryId(entryOrId: T | string): string;
@@ -11,10 +11,18 @@ export abstract class ChildNode<T, S extends SerializedChildNodes> {
         return this.parents.has(id);
     }
 
-    getParents(entryOrId: T | string): string[] {
+    getParents(entryOrId: T | string): (T | string)[] {
         const id = this.assertEntryId(entryOrId);
 
-        const parents = this.parents.get(id) ?? this.setParents(id, []);
+        const parents: (T | string)[] = [];
+
+        if (typeof entryOrId !== 'string' && entryOrId.parents) {
+            parents.push(...entryOrId.parents);
+        }
+
+        if (this.parents.has(id)) {
+            parents.push(...this.parents.get(id)!);
+        }
 
         return parents;
     }
@@ -27,7 +35,8 @@ export abstract class ChildNode<T, S extends SerializedChildNodes> {
     }
 
     addParents(entryOrId: T | string, parents: string[]) {
-        const currentParents = this.getParents(entryOrId);
+        const currentParents = this.parents.get(this.assertEntryId(entryOrId)) ?? [];
+        this.parents.set(this.assertEntryId(entryOrId), currentParents);
 
         for (const parent of parents) {
             if (!currentParents.includes(parent)) {
@@ -37,14 +46,14 @@ export abstract class ChildNode<T, S extends SerializedChildNodes> {
     }
 
     getParentsRecursive(entryOrId: T | string): string[] {
-        const stack = [this.assertEntryId(entryOrId)];
+        const stack = [entryOrId];
         const result: string[] = [];
 
         while (true) {
             const e = stack.pop();
             if (undefined === e) break;
-            if (result.includes(e)) continue;
-            result.push(e);
+            if (result.includes(this.assertEntryId(e))) continue;
+            result.push(this.assertEntryId(e));
 
             stack.push(...this.getParents(e).toReversed());
         }

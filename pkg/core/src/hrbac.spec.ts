@@ -81,6 +81,7 @@ describe('HRBAC', () => {
             expect(await hrbac.isAllowed('guest', documentA, 'update')).toBeFalse();
             expect(await hrbac.isDenied('guest', documentA, 'update')).toBeTrue();
         });
+
         it('admin', async () => {
             expect(await hrbac.isAllowed(admin, 'settings')).toBeTrue();
             expect(await hrbac.isDenied(admin, 'settings')).toBeFalse();
@@ -131,12 +132,61 @@ describe('HRBAC', () => {
         });
     });
 
-    it('should support resource inheritance', async () => {
+    it('should support global resource inheritance', async () => {
         hrbac = new HRBAC(new RoleManager(), new ResourceManager(), new PermissionManager());
-        hrbac.getResourceManager().addParents('child', ['parent']);
+        hrbac.getResourceManager().addParents('parent-resource', ['grand-parent-resource']);
+        hrbac.getResourceManager().addParents('child-resource', ['parent-resource']);
         hrbac.getPermissionManager().deny();
-        hrbac.getPermissionManager().allow('role', 'parent');
+        hrbac.getPermissionManager().allow('role1', 'parent-resource');
+        hrbac.getPermissionManager().allow('role2', 'grand-parent-resource');
 
-        expect(await hrbac.isAllowed('role', 'child')).toBeTrue();
+        expect(await hrbac.isAllowed('role1', 'child-resource')).toBeTrue();
+        expect(await hrbac.isAllowed('role2', 'child-resource')).toBeTrue();
+    });
+
+    it('should support local resource inheritance', async () => {
+        hrbac = new HRBAC(new RoleManager(), new ResourceManager(), new PermissionManager());
+        hrbac.getPermissionManager().deny();
+        hrbac.getPermissionManager().allow('role1', 'parent-resource');
+        hrbac.getPermissionManager().allow('role2', 'grand-parent-resource');
+
+        expect(
+            await hrbac.isAllowed(
+                'role1',
+                new Resource('child-resource', [new Resource('parent-resource', [new Resource('grand-parent-resource')])])
+            )
+        ).toBeTrue();
+        expect(
+            await hrbac.isAllowed(
+                'role2',
+                new Resource('child-resource', [new Resource('parent-resource', [new Resource('grand-parent-resource')])])
+            )
+        ).toBeTrue();
+    });
+
+    it('should support global role inheritance', async () => {
+        hrbac = new HRBAC(new RoleManager(), new ResourceManager(), new PermissionManager());
+        hrbac.getRoleManager().addParents('parent-role', ['grand-parent-role']);
+        hrbac.getRoleManager().addParents('child-role', ['parent-role']);
+        hrbac.getPermissionManager().deny();
+        hrbac.getPermissionManager().allow('parent-role', 'resource1');
+        hrbac.getPermissionManager().allow('grand-parent-role', 'resource2');
+
+        expect(await hrbac.isAllowed('child-role', 'resource1')).toBeTrue();
+        expect(await hrbac.isAllowed('child-role', 'resource2')).toBeTrue();
+    });
+
+    it('should support local role inheritance', async () => {
+        hrbac = new HRBAC(new RoleManager(), new ResourceManager(), new PermissionManager());
+        hrbac.getPermissionManager().deny();
+        hrbac.getPermissionManager().allow('parent-role', 'resource1');
+        hrbac.getPermissionManager().allow('grand-parent-role', 'resource2');
+
+        expect(
+            await hrbac.isAllowed(new Role('child-role', [new Role('parent-role', [new Role('grand-parent-role')])]), 'resource1')
+        ).toBeTrue();
+        expect(
+            await hrbac.isAllowed(new Role('child-role', [new Role('parent-role', [new Role('grand-parent-role')])]), 'resource2')
+        ).toBeTrue();
     });
 });
