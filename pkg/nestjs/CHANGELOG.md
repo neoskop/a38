@@ -1,5 +1,11 @@
 # @a38/nestjs
 
+## 0.0.6
+
+### Patch Changes
+
+-   Bump core version
+
 ## 0.0.5
 
 ### Patch Changes

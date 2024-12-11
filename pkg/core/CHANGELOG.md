@@ -1,5 +1,11 @@
 # @a38/core
 
+## 0.0.6
+
+### Patch Changes
+
+-   6888fde: Add local resource and role inheritance
+
 ## 0.0.5
 
 ### Patch Changes

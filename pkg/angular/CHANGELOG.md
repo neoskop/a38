@@ -1,5 +1,11 @@
 # @a38/angular
 
+## 0.0.4
+
+### Patch Changes
+
+-   Bump core version
+
 ## 0.0.2
 
 ### Patch Changes
